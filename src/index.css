@@ -10,7 +10,189 @@ body {
 
 #root {
   display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Site header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.site-header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+.site-nav {
+  display: flex;
+  gap: 4px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.site-nav-btn {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.site-nav-btn:hover {
+  color: #ccc;
+}
+
+.site-nav-btn.active {
+  background: #333;
+  color: #fff;
+}
+
+.site-main {
+  flex: 1;
+  display: flex;
   justify-content: center;
+}
+
+/* Python runner */
+.python-runner {
+  margin-top: 8px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.python-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: #222;
+  border-bottom: 1px solid #333;
+}
+
+.python-filename {
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+.python-run-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #2ea043;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.python-run-btn:hover { background: #3fb950; }
+.python-run-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.python-editor-wrap {
+  display: grid;
+}
+
+.python-editor-wrap > * {
+  grid-area: 1 / 1;
+  margin: 0;
+  padding: 16px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  tab-size: 4;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  border: none;
+}
+
+.python-highlight {
+  background: transparent;
+  color: #e0e0e0;
+  pointer-events: none;
+}
+
+.python-editor {
+  width: 100%;
+  background: transparent;
+  color: transparent;
+  caret-color: #fff;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+}
+
+/* Prism token colors — dark theme */
+.token.comment,
+.token.prolog,
+.token.doctype { color: #6a9955; }
+.token.keyword { color: #c586c0; }
+.token.builtin { color: #4ec9b0; }
+.token.function { color: #dcdcaa; }
+.token.string,
+.token.triple-quoted-string { color: #ce9178; }
+.token.number { color: #b5cea8; }
+.token.boolean { color: #569cd6; }
+.token.operator { color: #d4d4d4; }
+.token.punctuation { color: #d4d4d4; }
+.token.decorator { color: #dcdcaa; }
+.token.class-name { color: #4ec9b0; }
+
+.python-output {
+  border-top: 1px solid #333;
+}
+
+.python-output-header {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  background: #222;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.python-output-content {
+  padding: 14px 16px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #4ec9b0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
 }
 
 /* Product brief layout */

@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import PhoneMockup from './PhoneMockup'
+import PythonRunner from './PythonRunner'
 
-export default function App() {
+function YouTubeBrief() {
   return (
     <article className="brief">
       <h1>YouTube Recommendations Refresh</h1>
@@ -9,9 +11,9 @@ export default function App() {
       <section>
         <h2>Problem</h2>
         <p>
-          When a user finishes or pauses a video on mobile and scrolls down, they enter the single
-          video recommendations strip. If nothing in that strip grabs them, they close the app. The
-          session ends.
+          When a user finishes or pauses a video and scrolls down, they enter the single
+          video recommendations strip. If nothing in that strip grabs them, they close the app.
+          The session ends.
         </p>
         <p>
           On the main recommendations screen, users have a natural escape valve: pull-to-refresh.
@@ -168,18 +170,61 @@ export default function App() {
         <h2>Build Assessment</h2>
         <p><strong>What exists:</strong> Recommendation API, topic filter bar UI, strip render logic, session context tracking</p>
         <p><strong>What&rsquo;s new:</strong> One tap target (icon or text label), API call with exclusion parameter for already-shown video IDs, strip reload animation</p>
-        <p><strong>Estimate:</strong> One frontend engineer, one designer, approximately one week of build, two weeks of test. No backend infrastructure changes. No cross-team dependencies.</p>
+        <p><strong>Estimate:</strong> One frontend engineer each for Android, iOS, and Web, one designer, approximately one week of build, two weeks of test. No backend infrastructure changes. No cross-team dependencies.</p>
       </section>
 
       <section>
         <h2>Risks</h2>
         <ul>
           <li><strong>Semantic ambiguity (Option A):</strong> The refresh chip may be interpreted as a topic filter. Mitigated by icon choice.</li>
-          <li><strong>New UI pattern (Option B):</strong> The inline label introduces a control not present elsewhere in YouTube mobile. Mitigated by lightweight styling and the A/B test.</li>
+          <li><strong>New UI pattern (Option 2):</strong> The inline label introduces a control that is not present elsewhere on YouTube. Mitigated by lightweight styling and the A/B test. If adoption is low, the pattern isn&rsquo;t working.</li>
           <li><strong>Recommendation quality on refresh:</strong> If the second-pass candidate pool is materially lower quality than the first, refresh creates a worse experience. Mitigated by tracking video start rate post-refresh as a guardrail metric.</li>
           <li><strong>Refresh loops:</strong> Users who refresh two or more times without starting a video signal that recommendations have been exhausted for this session context. Track as a recommendation-quality health metric rather than a feature-failure signal.</li>
         </ul>
       </section>
     </article>
+  )
+}
+
+function AlgorithmicPage() {
+  return (
+    <article className="brief">
+      <h1>Algorithmic</h1>
+      <p className="brief-subtitle">Python</p>
+      <section>
+        <PythonRunner />
+      </section>
+    </article>
+  )
+}
+
+export default function App() {
+  const [page, setPage] = useState('youtube')
+
+  return (
+    <>
+      <header className="site-header">
+        <div className="site-header-inner">
+          <span className="site-title">Casap Take Home</span>
+          <nav className="site-nav">
+            <button
+              className={`site-nav-btn${page === 'youtube' ? ' active' : ''}`}
+              onClick={() => setPage('youtube')}
+            >
+              YouTube
+            </button>
+            <button
+              className={`site-nav-btn${page === 'algorithmic' ? ' active' : ''}`}
+              onClick={() => setPage('algorithmic')}
+            >
+              Algorithmic
+            </button>
+          </nav>
+        </div>
+      </header>
+      <main className="site-main">
+        {page === 'youtube' ? <YouTubeBrief /> : <AlgorithmicPage />}
+      </main>
+    </>
   )
 }
